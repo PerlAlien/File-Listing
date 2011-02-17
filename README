@@ -1,94 +1,52 @@
+NAME
+    File::Listing - parse directory listing
 
-                     L I B W W W - P E R L - 5
-                   -----------------------------
+SYNOPSIS
+     use File::Listing qw(parse_dir);
+     $ENV{LANG} = "C";  # dates in non-English locales not supported
+     for (parse_dir(`ls -l`)) {
+         ($name, $type, $size, $mtime, $mode) = @$_;
+         next if $type ne 'f'; # plain file
+         #...
+     }
 
+     # directory listing can also be read from a file
+     open(LISTING, "zcat ls-lR.gz|");
+     $dir = parse_dir(\*LISTING, '+0000');
 
-The libwww-perl collection is a set of Perl modules which provides a
-simple and consistent application programming interface to the
-World-Wide Web.  The main focus of the library is to provide classes
-and functions that allow you to write WWW clients. The library also
-contain modules that are of more general use and even classes that
-help you implement simple HTTP servers.
+DESCRIPTION
+    This module exports a single function called parse_dir(), which can be
+    used to parse directory listings.
 
+    The first parameter to parse_dir() is the directory listing to parse. It
+    can be a scalar, a reference to an array of directory lines or a glob
+    representing a filehandle to read the directory listing from.
 
-PREREQUISITES
+    The second parameter is the time zone to use when parsing time stamps in
+    the listing. If this value is undefined, then the local time zone is
+    assumed.
 
-In order to install and use this package you will need Perl version
-5.8.8 or better.  Some modules within this package depend on other
-packages that are distributed separately from Perl.  We recommend that
-you have the following packages installed before you install
-libwww-perl:
+    The third parameter is the type of listing to assume. Currently
+    supported formats are 'unix', 'apache' and 'dosftp'. The default value
+    'unix'. Ideally, the listing type should be determined automatically.
 
-  URI
-  MIME-Base64
-  HTML-Tagset
-  HTML-Parser
-  libnet
-  Digest-MD5
-  Encode-Locale
-  Compress-Zlib
+    The fourth parameter specifies how unparseable lines should be treated.
+    Values can be 'ignore', 'warn' or a code reference. Warn means that the
+    perl warn() function will be called. If a code reference is passed, then
+    this routine will be called and the return value from it will be
+    incorporated in the listing. The default is 'ignore'.
 
-If you want to access sites using the https protocol, then you need to
-install the Crypt::SSLeay or the IO::Socket::SSL module.  The
-README.SSL file will tell you more about how libwww-perl supports SSL.
+    Only the first parameter is mandatory.
 
+    The return value from parse_dir() is a list of directory entries. In a
+    scalar context the return value is a reference to the list. The
+    directory entries are represented by an array consisting of [ $filename,
+    $filetype, $filesize, $filetime, $filemode ]. The $filetype value is one
+    of the letters 'f', 'd', 'l' or '?'. The $filetime value is the seconds
+    since Jan 1, 1970. The $filemode is a bitmask like the mode returned by
+    stat().
 
-INSTALLATION
+CREDITS
+    Based on lsparse.pl (from Lee McLoughlin's ftp mirror package) and
+    Net::FTP's parse_dir (Graham Barr).
 
-You install libwww-perl using the normal perl module distribution drill:
-
-   perl Makefile.PL
-   make
-   make test
-   make install
-
-If you don't want to install any programs (only the library files) then
-pass the '--no-programs' option to Makefile.PL:
-
-   perl Makefile.PL --no-programs
-
-
-DOCUMENTATION
-
-See the lib/LWP.pm file for an overview of the library. See the
-Changes file for recent changes.
-
-POD style documentation is included in all modules and scripts.  These
-are normally converted to manual pages and installed as part of the
-"make install" process.  You should also be able to use the 'perldoc'
-utility to extract and read documentation from the module files
-directly.
-
-
-SUPPORT
-
-Bug reports and suggestions for improvements can be sent to the
-<libwww@perl.org> mailing list.  This mailing list is also the place
-for general discussions and development of the libwww-perl package.
-
-
-AVAILABILITY
-
-The latest version of libwww-perl is available from CPAN:
-
-     http://search.cpan.org/dist/libwww-perl/
-
-If you want to hack on the source it might be a good idea to grab the
-latest version with git using the command:
-
-     git clone git://github.com/gisle/libwww-perl.git lwp
-
-You can also browse the git repository at:
-
-     http://github.com/gisle/libwww-perl
-
-
-COPYRIGHT
-
-  © 1995-2010 Gisle Aas. All rights reserved.
-  © 1995 Martijn Koster. All rights reserved.
-
-This library is free software; you can redistribute it and/or modify
-it under the same terms as Perl itself.
-
-Enjoy!
