@@ -1,5 +1,16 @@
 #!perl -w
 
+BEGIN {
+    eval {
+	require LWP::Simple;
+    };
+    if ($@) {
+	print "1..0 # SKIP LWP::Simple not installed\n";
+	print $@;
+	exit;
+    }
+}
+
 use Test;
 
 use strict;
