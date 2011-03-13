@@ -407,7 +407,12 @@ $filetype value is one of the letters 'f', 'd', 'l' or '?'.  The
 $filetime value is the seconds since Jan 1, 1970.  The
 $filemode is a bitmask like the mode returned by stat().
 
-=head1 CREDITS
+=head1 COPYRIGHT
+
+Copyright 1996-2010, Gisle Aas
 
 Based on lsparse.pl (from Lee McLoughlin's ftp mirror package) and
 Net::FTP's parse_dir (Graham Barr).
+
+This library is free software; you can redistribute it and/or
+modify it under the same terms as Perl itself.
