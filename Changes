@@ -1,4 +1,12 @@
 _______________________________________________________________________________
+2011-03-20 File-Listing 6.02
+
+Avoid running live test.  Embed the expected test data in the test file.
+Update the test data inline by invoking 'perl t/apache.t --update'.
+
+
+
+_______________________________________________________________________________
 2011-03-13 File-Listing 6.01
 
 Added legal notice and updated the meta repository link
