@@ -405,7 +405,7 @@ assumed.
 
 The third parameter is the type of listing to assume.  Currently
 supported formats are 'unix', 'apache' and 'dosftp'.  The default
-value 'unix'.  Ideally, the listing type should be determined
+value is 'unix'.  Ideally, the listing type should be determined
 automatically.
 
 The fourth parameter specifies how unparseable lines should be treated.
