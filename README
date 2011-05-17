@@ -28,7 +28,7 @@ DESCRIPTION
 
     The third parameter is the type of listing to assume. Currently
     supported formats are 'unix', 'apache' and 'dosftp'. The default value
-    'unix'. Ideally, the listing type should be determined automatically.
+    is 'unix'. Ideally, the listing type should be determined automatically.
 
     The fourth parameter specifies how unparseable lines should be treated.
     Values can be 'ignore', 'warn' or a code reference. Warn means that the
