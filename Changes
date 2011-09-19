@@ -1,4 +1,15 @@
 _______________________________________________________________________________
+2011-09-20 File-Listing 6.03
+
+Erik Esterer (1):
+      Minor mistake in module description
+
+Peter John Acklam (1):
+      Fixes to the parsing of 'ls -l' file modes [RT#71054]
+
+
+
+_______________________________________________________________________________
 2011-03-20 File-Listing 6.02
 
 Avoid running live test.  Embed the expected test data in the test file.
