@@ -5,3 +5,7 @@ MANIFEST			This list of files
 README
 t/apache.t
 t/ls-lR.t
+t/perm1.t
+t/perm2.t
+t/perm3.t
+t/perm4.t

@@ -35,30 +35,47 @@ sub init { } # Dummy sub
 
 sub file_mode ($)
 {
+    Carp::croak("Input to file_mode() must be a 10 character string.")
+        unless length($_[0]) == 10;
+
     # This routine was originally borrowed from Graham Barr's
     # Net::FTP package.
 
     local $_ = shift;
     my $mode = 0;
-    my($type,$ch);
+    my($type);
 
     s/^(.)// and $type = $1;
+
+    # When the set-group-ID bit (file mode bit 02000) is set, and the group
+    # execution bit (file mode bit 00020) is unset, and it is a regular file,
+    # some implementations of `ls' use the letter `S', others use `l' or `L'.
+    # Convert this `S'.
+
+    s/[Ll](...)$/S$1/;
 
     while (/(.)/g) {
 	$mode <<= 1;
 	$mode |= 1 if $1 ne "-" &&
 		      $1 ne 'S' &&
-		      $1 ne 't' &&
 		      $1 ne 'T';
     }
 
-    $type eq "d" and $mode |= 0040000 or	# Directory
-      $type eq "l" and $mode |= 0120000 or	# Symbolic Link
-	$mode |= 0100000;			# Regular File
+    $mode |= 0004000 if /^..s....../i;
+    $mode |= 0002000 if /^.....s.../i;
+    $mode |= 0001000 if /^........t/i;
 
-    $mode |= 0004000 if /^...s....../i;
-    $mode |= 0002000 if /^......s.../i;
-    $mode |= 0001000 if /^.........t/i;
+    # De facto standard definitions. From 'stat.h' on Solaris 9.
+
+    $type eq "p" and $mode |= 0010000 or        # fifo
+    $type eq "c" and $mode |= 0020000 or        # character special
+    $type eq "d" and $mode |= 0040000 or        # directory
+    $type eq "b" and $mode |= 0060000 or        # block special
+    $type eq "-" and $mode |= 0100000 or        # regular
+    $type eq "l" and $mode |= 0120000 or        # symbolic link
+    $type eq "s" and $mode |= 0140000 or        # socket
+    $type eq "D" and $mode |= 0150000 or        # door
+      Carp::croak("Unknown file type: $type");
 
     $mode;
 }
