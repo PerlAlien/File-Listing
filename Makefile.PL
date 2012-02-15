@@ -15,7 +15,7 @@ WriteMakefile(
     },
     META_MERGE => {
 	resources => {
-            repository => 'http://github.com/gisle/libwww-perl/tree/File-Listing/master',
+            repository => 'http://github.com/gisle/file-listing',
 	    MailingList => 'mailto:libwww@perl.org',
         }
     },
