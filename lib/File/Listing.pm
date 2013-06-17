@@ -90,7 +90,7 @@ sub parse
    # file handles to read from.
 
    if (ref($dir) eq 'ARRAY') {
-       # Already splitted up
+       # Already split up
    }
    elsif (ref($dir) eq 'GLOB') {
        # A file handle
