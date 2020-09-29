@@ -1,8 +1,10 @@
 #!perl -w
 
-require 5.006002;
+use 5.006002;
 use strict;
+use warnings;
 use ExtUtils::MakeMaker;
+
 WriteMakefile(
     NAME => 'File::Listing',
     VERSION_FROM => 'lib/File/Listing.pm',
@@ -14,10 +16,18 @@ WriteMakefile(
 	'HTTP::Date' => 6,
     },
     META_MERGE => {
-	resources => {
-            repository => 'http://github.com/PerlAlien/File-Listing',
-	    MailingList => 'mailto:libwww@perl.org',
-        }
+        'meta-spec' => { version => 2 },
+        resources => {
+            bugtracker => {
+                web  => 'https://github.com/PerlAlien/File-Listing/issues',
+            },
+            homepage => 'https://metacpan.org/pod/File::Listing',
+            repository => {
+                type => 'git',
+                url  => 'https://github.com/PerlAlien/File-Listing.git',
+                web  => 'https://github.com/PerlAlien/File-Listing',
+            },
+        },
     },
 );
 
