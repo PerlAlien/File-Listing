@@ -13,7 +13,15 @@ WriteMakefile(
     LICENSE => "perl",
     MIN_PERL_VERSION => 5.006002,
     PREREQ_PM => {
-	'HTTP::Date' => 6,
+	'HTTP::Date'  => 6,
+	'Exporter'    => 0,
+	'Time::Local' => 0,
+    },
+    CONFIGURE_REQUIRES => {
+        'ExtUtils::MakeMaker' => 0,
+    },
+    TEST_REQUIRES => {
+        'Test::More' => 0,
     },
     META_MERGE => {
         'meta-spec' => { version => 2 },
@@ -40,6 +48,8 @@ BEGIN {
         META_MERGE => 6.45,
         META_ADD => 6.45,
         MIN_PERL_VERSION => 6.48,
+        CONFIGURE_REQUIRES => 6.52,
+        TEST_REQUIRES => 6.64,
     );
     undef(*WriteMakefile);
     *WriteMakefile = sub {
