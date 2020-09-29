@@ -5,6 +5,8 @@ Revision history for File-Listing
   - Include Perl core modules in prereqs (rt#85100 / gh#2)
   - Converted Changes file to standard format (the original
     Changes file is available as Changes.original)
+  - Migrate Test.pm tests to use Test::More, all tests
+    use strict and warnings now.
 
 6.04 2012-02-15
   - Minor mistake in module description (Erik Esterer)

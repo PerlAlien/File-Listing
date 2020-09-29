@@ -8,6 +8,7 @@ require Exporter;
 @EXPORT = qw(parse_dir);
 
 use strict;
+use warnings;
 
 use Carp ();
 use HTTP::Date qw(str2time);
