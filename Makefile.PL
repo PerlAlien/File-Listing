@@ -16,6 +16,7 @@ WriteMakefile(
 	'HTTP::Date'  => 6,
 	'Exporter'    => 0,
 	'Time::Local' => 0,
+	'base'        => 0,
     },
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,

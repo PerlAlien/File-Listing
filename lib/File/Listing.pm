@@ -1,17 +1,16 @@
 package File::Listing;
 
-sub Version { $VERSION; }
-$VERSION = "6.04";
-
-require Exporter;
-@ISA = qw(Exporter);
-@EXPORT = qw(parse_dir);
-
 use strict;
 use warnings;
-
 use Carp ();
 use HTTP::Date qw(str2time);
+use base qw( Exporter );
+
+our $VERSION = "6.04";
+sub Version { $VERSION; }
+
+our @EXPORT = qw(parse_dir);
+
 
 
 
