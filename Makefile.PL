@@ -15,7 +15,7 @@ WriteMakefile(
     },
     META_MERGE => {
 	resources => {
-            repository => 'http://github.com/gisle/file-listing',
+            repository => 'http://github.com/PerlAlien/File-Listing',
 	    MailingList => 'mailto:libwww@perl.org',
         }
     },
