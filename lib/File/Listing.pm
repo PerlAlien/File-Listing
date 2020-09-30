@@ -178,7 +178,7 @@ sub line
 	    $type = 'd';
 	    $size = undef;  # Don't believe the reported size
 	}
-	return [$name, $type, $size, str2time($date, $tz), 
+	return [$name, $type, $size, str2time($date, $tz),
               File::Listing::file_mode($kind)];
 
     }
@@ -385,7 +385,7 @@ File::Listing - parse directory listing
      next if $type ne 'f'; # plain file
      #...
  }
-
+ 
  # directory listing can also be read from a file
  open(LISTING, "zcat ls-lR.gz|");
  $dir = parse_dir(\*LISTING, '+0000');
