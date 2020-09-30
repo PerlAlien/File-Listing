@@ -130,12 +130,10 @@ package File::Listing::unix;
 
 use HTTP::Date qw(str2time);
 
+our @ISA = qw(File::Listing);
+
 # A place to remember current directory from last line parsed.
-use vars qw($curdir @ISA);
-
-@ISA = qw(File::Listing);
-
-
+our $curdir;
 
 sub init
 {
@@ -225,10 +223,10 @@ package File::Listing::dosftp;
 
 use HTTP::Date qw(str2time);
 
-# A place to remember current directory from last line parsed.
-use vars qw($curdir @ISA);
+our @ISA = qw(File::Listing);
 
-@ISA = qw(File::Listing);
+# A place to remember current directory from last line parsed.
+our $curdir;
 
 
 
@@ -292,9 +290,7 @@ package File::Listing::netware;
 
 package File::Listing::apache;
 
-use vars qw(@ISA);
-
-@ISA = qw(File::Listing);
+our @ISA = qw(File::Listing);
 
 
 sub init { }
@@ -374,21 +370,21 @@ __END__
 
 =head1 NAME
 
-File::Listing - parse directory listing
+File::Listing - Parse directory listing
 
 =head1 SYNOPSIS
 
  use File::Listing qw(parse_dir);
  $ENV{LANG} = "C";  # dates in non-English locales not supported
- for (parse_dir(`ls -l`)) {
-     ($name, $type, $size, $mtime, $mode) = @$_;
+ foreach my $file (parse_dir(`ls -l`)) {
+     ($name, $type, $size, $mtime, $mode) = @$file;
      next if $type ne 'f'; # plain file
      #...
  }
  
  # directory listing can also be read from a file
- open(LISTING, "zcat ls-lR.gz|");
- $dir = parse_dir(\*LISTING, '+0000');
+ open my $listing, "zcat ls-lR.gz|";
+ $dir = parse_dir($listing, '+0000');
 
 =head1 DESCRIPTION
 
@@ -417,9 +413,9 @@ parsing time stamps in the listing. If this value is undefined,
 then the local time zone is assumed.
 
 The third parameter (C<$type>) is the type of listing to assume.
-Currently supported formats are 'unix', 'apache' and 'dosftp'.
-The default value is 'unix'.  Ideally, the listing type should
-be determined automatically.
+Currently supported formats are C<'unix'>, C<'apache'> and
+C<'dosftp'>. The default value is C<'unix'>. Ideally, the listing
+type should be determined automatically.
 
 The fourth parameter (C<$error>) specifies how unparseable lines
 should be treated. Values can be C<'ignore'>, C<'warn'> or a code reference.

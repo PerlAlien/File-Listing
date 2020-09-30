@@ -1,18 +1,18 @@
 NAME
-    File::Listing - parse directory listing
+    File::Listing - Parse directory listing
 
 SYNOPSIS
      use File::Listing qw(parse_dir);
      $ENV{LANG} = "C";  # dates in non-English locales not supported
-     for (parse_dir(`ls -l`)) {
-         ($name, $type, $size, $mtime, $mode) = @$_;
+     foreach my $file (parse_dir(`ls -l`)) {
+         ($name, $type, $size, $mtime, $mode) = @$file;
          next if $type ne 'f'; # plain file
          #...
      }
  
      # directory listing can also be read from a file
-     open(LISTING, "zcat ls-lR.gz|");
-     $dir = parse_dir(\*LISTING, '+0000');
+     open my $listing, "zcat ls-lR.gz|";
+     $dir = parse_dir($listing, '+0000');
 
 DESCRIPTION
     This module exports a single function called "parse_dir", which can be
