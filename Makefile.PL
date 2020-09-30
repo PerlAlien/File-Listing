@@ -13,10 +13,10 @@ WriteMakefile(
     LICENSE => "perl",
     MIN_PERL_VERSION => 5.006002,
     PREREQ_PM => {
-	'HTTP::Date'  => 6,
-	'Exporter'    => 0,
-	'Time::Local' => 0,
-	'base'        => 0,
+	'HTTP::Date'  => '6.00',
+	'Exporter'    => '0',
+	'Time::Local' => '0',
+	'base'        => '0',
     },
     CONFIGURE_REQUIRES => {
         'ExtUtils::MakeMaker' => 0,
