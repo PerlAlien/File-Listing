@@ -79,6 +79,11 @@ FUNCTIONS
     mode
         Bitmask a la the mode returned by "stat".
 
+SEE ALSO
+    File::Listing::Ftpcopy
+        Provides the same interface but uses XS and the parser
+        implementation from "ftpcopy".
+
 COPYRIGHT
     Copyright 1996-2010, Gisle Aas Copyright 2020 Graham Ollis
 

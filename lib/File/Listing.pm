@@ -470,6 +470,16 @@ Bitmask a la the mode returned by C<stat>.
 
 =back
 
+=head1 SEE ALSO
+
+=over 4
+
+=item L<File::Listing::Ftpcopy>
+
+Provides the same interface but uses XS and the parser implementation from C<ftpcopy>.
+
+=back
+
 =head1 COPYRIGHT
 
 Copyright 1996-2010, Gisle Aas
