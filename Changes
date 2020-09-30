@@ -1,5 +1,7 @@
 Revision history for File-Listing
 
+  - Add examples to documentation.
+
 6.05_01 2020-09-29 21:25:35 -0600
   - New maintainer (Graham Ollis / plicease)
   - New GitHub repository https://github.com/PerlAlien/File-Listing
