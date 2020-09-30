@@ -1,6 +1,7 @@
 Changes
 Changes.original
 lib/File/Listing.pm
+LICENSE
 maint/cip-before-install
 maint/releaseprep
 Makefile.PL
