@@ -393,7 +393,7 @@ File::Listing - parse directory listing
 
 =head1 DESCRIPTION
 
-This module exports a single function called parse_dir(), which can be
+This module exports a single function called C<parse_dir>, which can be
 used to parse directory listings.
 
 =head1 FUNCTIONS
