@@ -390,7 +390,7 @@ File::Listing - Parse directory listing
  use File::Listing qw(parse_dir);
  $ENV{LANG} = "C";  # dates in non-English locales not supported
  foreach my $file (parse_dir(`ls -l`)) {
-     ($name, $type, $size, $mtime, $mode) = @$file;
+     my ($name, $type, $size, $mtime, $mode) = @$file;
      next if $type ne 'f'; # plain file
      #...
  }
