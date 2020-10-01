@@ -325,7 +325,7 @@ sub line {
 	$filesize = int $filesize;
 
 	require Time::Local;
-	my $filetime = Time::Local::timelocal(0,$M,$H,$d,$m-1,_guess_year($y)-1900);
+	my $filetime = Time::Local::timelocal(0,$M,$H,$d,$m-1,_guess_year($y));
 	my $filetype = ($filename =~ s|/$|| ? "d" : "f");
 	return [$filename, $filetype, $filesize, $filetime, undef];
     }
@@ -336,9 +336,21 @@ sub line {
 
 sub _guess_year {
     my $y = shift;
-    if ($y >= 90) {
+
+    # if the year is already four digit then we shouldn't do
+    # anything to modify it.
+    if ($y >= 1900) {
+        # do nothing
+
+    # TODO: for hysterical er historical reasons we assume 9x is in the
+    # 1990s we should probably not do that, but I don't have any examples
+    # where apache provides two digit dates so I am leaving this as-is
+    # for now.  Possibly the right thing is to not handle two digit years.
+    } elsif ($y >= 90) {
 	$y = 1900+$y;
     }
+
+    # TODO: likewise assuming 00-89 are 20xx is long term probably wrong.
     elsif ($y < 100) {
 	$y = 2000+$y;
     }
