@@ -6,7 +6,8 @@ use Carp ();
 use HTTP::Date qw(str2time);
 use base qw( Exporter );
 
-our $VERSION = '6.07';
+our $VERSION = '6.08_01';
+$VERSION =~ tr/_//d;
 sub Version { $VERSION; }
 
 our @EXPORT = qw(parse_dir);

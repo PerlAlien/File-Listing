@@ -2,6 +2,11 @@ Changes
 Changes.original
 lib/File/Listing.pm
 LICENSE
+maint/apache/build
+maint/apache/Dockerfile
+maint/apache/httpd.conf
+maint/apache/push
+maint/apache/run
 maint/cip-before-install
 maint/releaseprep
 Makefile.PL
