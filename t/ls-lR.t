@@ -1,5 +1,3 @@
-#!perl -w
-
 use strict;
 use warnings;
 use Test::More;
@@ -58,14 +56,20 @@ EOL
   check_output( parse_dir($dir, undef, 'unix') );
 }
 
-{
-  open LISTING, '<', \$dir;
-  check_output( parse_dir(\*LISTING, undef, 'unix') );
-}
+SKIP: {
+  skip "tests require 5.8.0 or better", 2 unless $] > 5.008;
 
-{
-  open my $fh, '<', \$dir;
-  check_output( parse_dir($fh, undef, 'unix') );
+  eval  ## no critic (BuiltinFunctions::ProhibitStringyEval)
+  q{
+    open LISTING, '<', \$dir;
+    check_output( parse_dir(\*LISTING, undef, 'unix') );
+  };
+
+  eval  ## no critic (BuiltinFunctions::ProhibitStringyEval)
+  q{
+    open my $fh, '<', \$dir;
+    check_output( parse_dir($fh, undef, 'unix') );  
+  };
 }
 
 sub check_output {
