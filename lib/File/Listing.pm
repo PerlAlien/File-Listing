@@ -54,10 +54,10 @@ sub file_mode ($)
     s/[Ll](...)$/S$1/;
 
     while (/(.)/g) {
-	$mode <<= 1;
-	$mode |= 1 if $1 ne "-" &&
-		      $1 ne 'S' &&
-		      $1 ne 'T';
+        $mode <<= 1;
+        $mode |= 1 if $1 ne "-" &&
+                      $1 ne 'S' &&
+                      $1 ne 'T';
     }
 
     $mode |= 0004000 if /^..s....../i;
@@ -110,14 +110,14 @@ sub parse
    my @files = ();
    if (ref($dir) eq 'ARRAY') {
        for (@$dir) {
-	   push(@files, $pkg->line($_, $tz, $error));
+           push(@files, $pkg->line($_, $tz, $error));
        }
    }
    else {
        local($_);
        while (<$dir>) {
-	   chomp;
-	   push(@files, $pkg->line($_, $tz, $error));
+           chomp;
+           push(@files, $pkg->line($_, $tz, $error));
        }
    }
    wantarray ? @files : \@files;
@@ -151,42 +151,42 @@ sub line
 
     my ($kind, $size, $date, $name);
     if (($kind, $size, $date, $name) =
-	/^([\-FlrwxsStTdD]{10})                   # Type and permission bits
-	 .*                                       # Graps
-	 \D(\d+)                                  # File size
-	 \s+                                      # Some space
-	 (\w{3}\s+\d+\s+(?:\d{1,2}:\d{2}|\d{4})|\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})  # Date
-	 \s+                                      # Some more space
-	 (.*)$                                    # File name
-	/x )
+        /^([\-FlrwxsStTdD]{10})                   # Type and permission bits
+         .*                                       # Graps
+         \D(\d+)                                  # File size
+         \s+                                      # Some space
+         (\w{3}\s+\d+\s+(?:\d{1,2}:\d{2}|\d{4})|\d{4}-\d{2}-\d{2}\s+\d{2}:\d{2})  # Date
+         \s+                                      # Some more space
+         (.*)$                                    # File name
+        /x )
 
     {
-	return if $name eq '.' || $name eq '..';
-	$name = "$curdir/$name" if length $curdir;
-	my $type = '?';
-	if ($kind =~ /^l/ && $name =~ /(.*) -> (.*)/ ) {
-	    $name = $1;
-	    $type = "l $2";
-	}
-	elsif ($kind =~ /^[\-F]/) { # (hopefully) a regular file
-	    $type = 'f';
-	}
-	elsif ($kind =~ /^[dD]/) {
-	    $type = 'd';
-	    $size = undef;  # Don't believe the reported size
-	}
-	return [$name, $type, $size, str2time($date, $tz),
+        return if $name eq '.' || $name eq '..';
+        $name = "$curdir/$name" if length $curdir;
+        my $type = '?';
+        if ($kind =~ /^l/ && $name =~ /(.*) -> (.*)/ ) {
+            $name = $1;
+            $type = "l $2";
+        }
+        elsif ($kind =~ /^[\-F]/) { # (hopefully) a regular file
+            $type = 'f';
+        }
+        elsif ($kind =~ /^[dD]/) {
+            $type = 'd';
+            $size = undef;  # Don't believe the reported size
+        }
+        return [$name, $type, $size, str2time($date, $tz),
               File::Listing::file_mode($kind)];
 
     }
     elsif (/^(.+):$/ && !/^[dcbsp].*\s.*\s.*:$/ ) {
-	my $dir = $1;
-	return () if $dir eq '.';
-	$curdir = $dir;
-	return ();
+        my $dir = $1;
+        return () if $dir eq '.';
+        $curdir = $dir;
+        return ();
     }
     elsif (/^[Tt]otal\s+(\d+)$/ || /^\s*$/) {
-	return ();
+        return ();
     }
     elsif (/not found/    || # OSF1, HPUX, and SunOS return
              # "$file not found"
@@ -197,16 +197,16 @@ sub line
              /cannot find/     # Windows NT returns
              # "The system cannot find the path specified."
              ) {
-	return () unless defined $error;
-	&$error($_) if ref($error) eq 'CODE';
-	warn "Error: $_\n" if $error eq 'warn';
-	return ();
+        return () unless defined $error;
+        &$error($_) if ref($error) eq 'CODE';
+        warn "Error: $_\n" if $error eq 'warn';
+        return ();
     }
     elsif ($_ eq '') {       # AIX, and Linux return nothing
-	return () unless defined $error;
-	&$error("No such file or directory") if ref($error) eq 'CODE';
-	warn "Warning: No such file or directory\n" if $error eq 'warn';
-	return ();
+        return () unless defined $error;
+        &$error("No such file or directory") if ref($error) eq 'CODE';
+        warn "Warning: No such file or directory\n" if $error eq 'warn';
+        return ();
     }
     else {
         # parse failed, check if the dosftp parse understands it
@@ -255,24 +255,24 @@ sub line
          (.+)$                                    # File name
         /x )
     {
-	return if $name eq '.' || $name eq '..';
-	$name = "$curdir/$name" if length $curdir;
-	my $type = '?';
-	if ($size_or_dir eq '<DIR>') {
-	    $type = "d";
+        return if $name eq '.' || $name eq '..';
+        $name = "$curdir/$name" if length $curdir;
+        my $type = '?';
+        if ($size_or_dir eq '<DIR>') {
+            $type = "d";
             $size = ""; # directories have no size in the pc listing
         }
         else {
-	    $type = 'f';
+            $type = 'f';
             $size = $size_or_dir;
-	}
-	return [$name, $type, $size, str2time($date, $tz), undef];
+        }
+        return [$name, $type, $size, str2time($date, $tz), undef];
     }
     else {
-	return () unless defined $error;
-	&$error($_) if ref($error) eq 'CODE';
-	warn "Can't parse: $_\n" if $error eq 'warn';
-	return ();
+        return () unless defined $error;
+        &$error($_) if ref($error) eq 'CODE';
+        warn "Can't parse: $_\n" if $error eq 'warn';
+        return ();
     }
 
 }
@@ -302,31 +302,31 @@ sub line {
 
     s!</?t[rd][^>]*>! !g;  # clean away various table stuff
     if (m!<A\s+HREF=\"([^\"]+)\">.*</A>.*?(\d+)-([a-zA-Z]+|\d+)-(\d+)\s+(\d+):(\d+)\s+(?:([\d\.]+[kMG]?|-))!i) {
-	my($filename, $filesize) = ($1, $7);
-	my($d,$m,$y, $H,$M) = ($2,$3,$4,$5,$6);
-	if ($m =~ /^\d+$/) {
-	    ($d,$y) = ($y,$d) # iso date
-	}
-	else {
-	    $m = _monthabbrev_number($m);
-	}
+        my($filename, $filesize) = ($1, $7);
+        my($d,$m,$y, $H,$M) = ($2,$3,$4,$5,$6);
+        if ($m =~ /^\d+$/) {
+            ($d,$y) = ($y,$d) # iso date
+        }
+        else {
+            $m = _monthabbrev_number($m);
+        }
 
-	$filesize = 0 if $filesize eq '-';
-	if ($filesize =~ s/k$//i) {
-	    $filesize *= 1024;
-	}
-	elsif ($filesize =~ s/M$//) {
-	    $filesize *= 1024*1024;
-	}
-	elsif ($filesize =~ s/G$//) {
-	    $filesize *= 1024*1024*1024;
-	}
-	$filesize = int $filesize;
+        $filesize = 0 if $filesize eq '-';
+        if ($filesize =~ s/k$//i) {
+            $filesize *= 1024;
+        }
+        elsif ($filesize =~ s/M$//) {
+            $filesize *= 1024*1024;
+        }
+        elsif ($filesize =~ s/G$//) {
+            $filesize *= 1024*1024*1024;
+        }
+        $filesize = int $filesize;
 
-	require Time::Local;
-	my $filetime = Time::Local::timelocal(0,$M,$H,$d,$m-1,_guess_year($y));
-	my $filetype = ($filename =~ s|/$|| ? "d" : "f");
-	return [$filename, $filetype, $filesize, $filetime, undef];
+        require Time::Local;
+        my $filetime = Time::Local::timelocal(0,$M,$H,$d,$m-1,_guess_year($y));
+        my $filetype = ($filename =~ s|/$|| ? "d" : "f");
+        return [$filename, $filetype, $filesize, $filetime, undef];
     }
 
     return ();
@@ -346,12 +346,12 @@ sub _guess_year {
     # where apache provides two digit dates so I am leaving this as-is
     # for now.  Possibly the right thing is to not handle two digit years.
     } elsif ($y >= 90) {
-	$y = 1900+$y;
+        $y = 1900+$y;
     }
 
     # TODO: likewise assuming 00-89 are 20xx is long term probably wrong.
     elsif ($y < 100) {
-	$y = 2000+$y;
+        $y = 2000+$y;
     }
     $y;
 }
