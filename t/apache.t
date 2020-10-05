@@ -19,8 +19,8 @@ if (@ARGV && $ARGV[0] eq "--update") {
     require LWP::Simple;
     my @LISTING;
     for my $url (@URLS) {
-	push(@LISTING, LWP::Simple::get($url));
-	die unless defined $LISTING[-1];
+        push(@LISTING, LWP::Simple::get($url));
+        die unless defined $LISTING[-1];
     }
     my $data_pos = tell(DATA);
     open(my $fh, "+<", $0) || die;
