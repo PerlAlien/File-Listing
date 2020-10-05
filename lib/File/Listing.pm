@@ -6,14 +6,12 @@ use Carp ();
 use HTTP::Date qw(str2time);
 use base qw( Exporter );
 
-our $VERSION = '6.08_01';
-$VERSION =~ tr/_//d;
-sub Version { $VERSION; }
+# ABSTRACT: Parse directory listing
+# VERSION
+
+sub Version { $File::Listing::VERSION; }
 
 our @EXPORT = qw(parse_dir);
-
-
-
 
 sub parse_dir ($;$$$)
 {
@@ -381,10 +379,6 @@ sub _monthabbrev_number {
 
 __END__
 
-=head1 NAME
-
-File::Listing - Parse directory listing
-
 =head1 SYNOPSIS
 
  use File::Listing qw(parse_dir);
@@ -488,13 +482,4 @@ Provides the same interface but uses XS and the parser implementation from C<ftp
 
 =back
 
-=head1 COPYRIGHT
-
-Copyright 1996-2010, Gisle Aas
-Copyright 2020 Graham Ollis
-
-Based on lsparse.pl (from Lee McLoughlin's ftp mirror package) and
-L<Net::FTP>'s parse_dir (Graham Barr).
-
-This library is free software; you can redistribute it and/or
-modify it under the same terms as Perl itself.
+=cut
