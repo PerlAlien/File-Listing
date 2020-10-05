@@ -1,5 +1,3 @@
-#!perl -w
-
 use strict;
 use warnings;
 use Test::More;
@@ -19,7 +17,7 @@ my $dir = do {
 }
 
 {
-  open LISTING, '<', 'corpus/ls-lR.txt';
+  open LISTING, '<', 'corpus/ls-lR.txt';  ## no critic
   check_output( parse_dir(\*LISTING, undef, 'unix') );
 }
 
