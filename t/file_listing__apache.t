@@ -3,8 +3,6 @@ use warnings;
 use Test::More;
 use File::Listing;
 
-plan tests => 535;
-
 my @URLS = (
     "http://www.apache.org/dist/apr/?C=N&O=D",
     "http://perl.apache.org/rpm/distrib/",
@@ -38,28 +36,7 @@ for my $url (@URLS) {
     ok(@listing);
 }
 
-sub year {
-  my $date = shift;
-  my $time = [
-    parse_dir(
-      qq{<img src="/icons/unknown.gif" alt="[   ]"> <a href="apache-modperl-1.3.6_1.19-0.i386.rpm">apache-modperl-1.3.6_1.19-0.i386.rpm</a>  $date  696K},
-      undef,
-      "apache",
-    )
-  ]->[0]->[3];
-
-  [localtime($time)]->[5] + 1900;
-}
-
-# Note: explicitly not tested are two digit years,
-# because the current behavior is probably wrong.
-# Right now we assume 9x is 199x and 0-89 is 20xx,
-# which is definitely wrong in the long term, but
-# I don't even have any examples where apache provides
-# a two digit date.
-foreach my $year (1970..2500) {
-  is( year("$year-06-29 16:30"), $year, "year = $year" );
-}
+done_testing;
 
 __DATA__
 <!DOCTYPE HTML PUBLIC "-//W3C//DTD HTML 3.2 Final//EN">
