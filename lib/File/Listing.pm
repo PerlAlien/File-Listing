@@ -115,12 +115,12 @@ sub parse
    }
    else {
        local($_);
-       while (<$dir>) {
-           chomp;
-           push(@files, $pkg->line($_, $tz, $error));
+       while (my $line = <$dir>) {
+           chomp $line;
+           push(@files, $pkg->line($line, $tz, $error));
        }
    }
-   wantarray ? @files : \@files;
+   wantarray ? @files : \@files;  ## no critic (Freenode::Wantarray)
 }
 
 
@@ -280,10 +280,10 @@ sub line
 
 
 package File::Listing::vms;
-@File::Listing::vms::ISA = qw(File::Listing);
+our @ISA = qw(File::Listing);
 
 package File::Listing::netware;
-@File::Listing::netware::ISA = qw(File::Listing);
+our @ISA = qw(File::Listing);
 
 
 
