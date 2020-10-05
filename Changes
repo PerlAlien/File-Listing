@@ -2,6 +2,9 @@ Revision history for {{$dist->name}}
 
 {{$NEXT}}
 
+6.10      2020-10-05 15:18:30 -0600
+  - Production version identical to 6.09_01
+
 6.09_01   2020-10-05 08:17:32 -0600
   - Remove TABs from source files and tests (gh#17)
   - Restores (theoretical, untested) support for 5.6, which was removed when
