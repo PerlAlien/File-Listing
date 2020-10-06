@@ -2,6 +2,7 @@ use strict;
 use warnings;
 use File::Listing;
 use Test::More;
+use Data::Dumper qw( Dumper );
 
 subtest 'unix' => sub {
 
@@ -70,6 +71,22 @@ EOT
 };
 
 subtest 'apache' => sub {
+
+
+  foreach my $num (1..3)
+  {
+    subtest "legacy $num" => sub {
+      my @dir = do {
+        open my $fh, '<', "corpus/apache-legacy$num.txt";
+        local $/;
+        <$fh>;
+      };
+
+      my @listing = parse_dir(shift @dir, undef, "apache");
+      ok(@listing);
+      note Dumper(\@listing);
+   };
+  }
 
   subtest 'year' => sub {
 
