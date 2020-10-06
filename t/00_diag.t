@@ -14,7 +14,6 @@ $modules{$_} = $_ for qw(
   Exporter
   ExtUtils::MakeMaker
   HTTP::Date
-  LWP::Simple
   Test::More
   Time::Local
 );

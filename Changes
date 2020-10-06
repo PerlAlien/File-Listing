@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Remove accidental recursive req on LWP::Simple
 
 6.10      2020-10-05 15:18:30 -0600
   - Production version identical to 6.09_01
