@@ -73,11 +73,55 @@ EOT
 subtest 'apache' => sub {
 
 
+  {
+    my %expected;
+    foreach my $test_name (qw( fancy-indexing html-table html-table-with-icons old-date xhtml with-icons ))
+    {
+      subtest $test_name => sub {
+        my $html = do {
+          open my $fh, '<', "corpus/apache-$test_name.html";
+          local $/;
+          <$fh>;
+        };
+
+        my %actual = map { $_->[0] => $_ } parse_dir($html, undef, "apache");
+
+        subtest 'dir' => sub {
+          note join(':', map { defined $_ ? $_ : 'undef' } @{ $actual{'lib'} });
+          is $actual{'lib'}->[0], 'lib';
+          is $actual{'lib'}->[1], 'd';
+          is $actual{'lib'}->[2], 0;
+          cmp_ok $actual{'lib'}->[3], '>', 0;
+          is $actual{'lib'}->[4], undef;
+        };
+
+        subtest 'file' => sub {
+          note join(':', map { defined $_ ? $_ : 'undef' } @{ $actual{'dist.ini'} });
+          is $actual{'dist.ini'}->[0], 'dist.ini';
+          is $actual{'dist.ini'}->[1], 'f';
+          cmp_ok $actual{'dist.ini'}->[2], '>', 0;
+          cmp_ok $actual{'dist.ini'}->[3], '>', 0;
+          is $actual{'dist.ini'}->[4], undef;
+        };
+
+        if(%expected)
+        {
+          is_deeply \%actual, \%expected;
+        }
+        else
+        {
+          %expected = %actual;
+        }
+
+      };
+    }
+  }
+
   foreach my $num (1..3)
   {
     subtest "legacy $num" => sub {
       my @dir = do {
-        open my $fh, '<', "corpus/apache-legacy$num.txt";
+        open my $fh, '<', "corpus/apache-legacy$num.html";
         local $/;
         <$fh>;
       };
