@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Handle default apache indexes (gh#20)
+  - Ignore certain known navigation links in apache indexes (gh#20)
 
 6.11      2020-10-06 03:00:45 -0600
   - Remove accidental recursive req on LWP::Simple

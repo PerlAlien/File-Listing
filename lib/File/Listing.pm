@@ -301,7 +301,7 @@ sub line {
     my($tz, $error) = @_; # ignored for now...
 
     s!</?t[rd][^>]*>! !g;  # clean away various table stuff
-    if (m!<A\s+HREF=\"([^\"]+)\">.*</A>.*?(\d+)-([a-zA-Z]+|\d+)-(\d+)\s+(\d+):(\d+)\s+(?:([\d\.]+[kMG]?|-))!i) {
+    if (m!<A\s+HREF=\"([^?\"]+)\">.*</A>.*?(\d+)-([a-zA-Z]+|\d+)-(\d+)\s+(\d+):(\d+)\s+(?:([\d\.]+[kMG]?|-))!i) {
         my($filename, $filesize) = ($1, $7);
         my($d,$m,$y, $H,$M) = ($2,$3,$4,$5,$6);
         if ($m =~ /^\d+$/) {
@@ -327,6 +327,15 @@ sub line {
         my $filetime = Time::Local::timelocal(0,$M,$H,$d,$m-1,_guess_year($y));
         my $filetype = ($filename =~ s|/$|| ? "d" : "f");
         return [$filename, $filetype, $filesize, $filetime, undef];
+    }
+
+    # the default listing doesn't include timestamps or file sizes
+    # but we don't want to grab navigation links, so we ignore links
+    # that have a non-trailing slash / character or ?
+    elsif(m!<A\s+HREF=\"([^?/\"]+/?)\">.*</A>!i) {
+        my $filename = $1;
+        my $filetype = ($filename =~ s|/$|| ? "d" : "f");
+        return [$filename, $filetype, undef, undef, undef];
     }
 
     return ();

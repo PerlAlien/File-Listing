@@ -115,6 +115,31 @@ subtest 'apache' => sub {
 
       };
     }
+
+    foreach my $file (values %expected)
+    {
+      $file->[2] = undef;
+      $file->[3] = undef;
+    }
+
+    subtest 'default' => sub {
+      my $html = do {
+        open my $fh, '<', "corpus/apache-default.html";
+        local $/;
+        <$fh>;
+      };
+
+      my %actual = map { $_->[0] => $_ } parse_dir($html, undef, "apache");
+
+      subtest 'dir' => sub {
+        is_deeply $actual{lib}, ['lib','d',undef,undef,undef];
+      };
+      subtest 'file' => sub {
+        is_deeply $actual{'dist.ini'}, ['dist.ini','f',undef,undef,undef];
+      };
+
+      is_deeply \%actual, \%expected;
+    };
   }
 
   foreach my $num (1..3)
