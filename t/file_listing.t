@@ -241,4 +241,21 @@ subtest 'perms' => sub {
 
 };
 
+subtest 'win32-openssh' => sub {
+  my $txt = do {
+    open my $fh, '<', "corpus/win32-openssh.txt";
+    local $/;
+    <$fh>;
+  };
+
+  my %actual = map { $_->[0] => $_ } parse_dir($txt, undef);
+
+  subtest 'dir' => sub {
+    is_deeply $actual{'.ssh'}, ['.ssh','d',undef,'1604323020','16832'];
+  };
+  subtest 'file' => sub {
+    is_deeply $actual{'.bash_history'}, ['.bash_history','f','2090','1604332320','33152'];
+  };
+};
+
 done_testing;
