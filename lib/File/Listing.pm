@@ -56,6 +56,7 @@ sub file_mode ($)
     while (/(.)/g) {
         $mode <<= 1;
         $mode |= 1 if $1 ne "-" &&
+                      $1 ne "*" &&
                       $1 ne 'S' &&
                       $1 ne 'T';
     }
@@ -151,7 +152,7 @@ sub line
 
     my ($kind, $size, $date, $name);
     if (($kind, $size, $date, $name) =
-        /^([\-FlrwxsStTdD]{10})                   # Type and permission bits
+        /^([\-\*FlrwxsStTdD]{10})                 # Type and permission bits
          .*                                       # Graps
          \D(\d+)                                  # File size
          \s+                                      # Some space
