@@ -251,10 +251,15 @@ subtest 'win32-openssh' => sub {
   my %actual = map { $_->[0] => $_ } parse_dir($txt, undef);
 
   subtest 'dir' => sub {
-    is_deeply $actual{'.ssh'}, ['.ssh','d',undef,'1604323020','16832'];
+    is $actual{'.ssh'}->[0], '.ssh';
+    is $actual{'.ssh'}->[1], 'd';
+    is $actual{'.ssh'}->[4], '16832';
   };
   subtest 'file' => sub {
-    is_deeply $actual{'.bash_history'}, ['.bash_history','f','2090','1604332320','33152'];
+    is $actual{'.bash_history'}->[0], '.bash_history';
+    is $actual{'.bash_history'}->[1], 'f';
+    is $actual{'.bash_history'}->[2], '2090';
+    is $actual{'.bash_history'}->[4], '33152';
   };
 };
 
