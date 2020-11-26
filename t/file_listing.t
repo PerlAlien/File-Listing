@@ -253,12 +253,14 @@ subtest 'win32-openssh' => sub {
   subtest 'dir' => sub {
     is $actual{'.ssh'}->[0], '.ssh';
     is $actual{'.ssh'}->[1], 'd';
+    like $actual{'.ssh'}->[3], qr/^[0-9]+$/;
     is $actual{'.ssh'}->[4], '16832';
   };
   subtest 'file' => sub {
     is $actual{'.bash_history'}->[0], '.bash_history';
     is $actual{'.bash_history'}->[1], 'f';
     is $actual{'.bash_history'}->[2], '2090';
+    like $actual{'.bash_history'}->[3], qr/^[0-9]+$/;
     is $actual{'.bash_history'}->[4], '33152';
   };
 };
