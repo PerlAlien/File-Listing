@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+6.12_01   2020-11-27 16:13:15 -0700
   - Handle default apache indexes (gh#20)
   - Ignore certain known navigation links in apache indexes (gh#20)
   - Support Win32 OpenSSH listing (gh#21 simon04++)
