@@ -1,4 +1,4 @@
-# File::Listing [![Build Status](https://api.travis-ci.com/PerlAlien/File-Listing.svg?branch=master)](https://travis-ci.com/github/PerlAlien/File-Listing)
+# File::Listing ![static](https://github.com/PerlAlien/File-Listing/workflows/static/badge.svg) ![linix](https://github.com/PerlAlien/File-Listing/workflows/linix/badge.svg)
 
 Parse directory listing
 
