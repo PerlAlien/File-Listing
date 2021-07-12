@@ -121,7 +121,7 @@ sub parse
            push(@files, $pkg->line($line, $tz, $error));
        }
    }
-   wantarray ? @files : \@files;  ## no critic (Freenode::Wantarray)
+   wantarray ? @files : \@files;  ## no critic (Community::Wantarray)
 }
 
 
