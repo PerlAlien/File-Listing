@@ -1,4 +1,4 @@
-# File::Listing ![static](https://github.com/PerlAlien/File-Listing/workflows/static/badge.svg) ![linix](https://github.com/PerlAlien/File-Listing/workflows/linix/badge.svg)
+# File::Listing ![static](https://github.com/PerlAlien/File-Listing/workflows/static/badge.svg) ![linux](https://github.com/PerlAlien/File-Listing/workflows/linux/badge.svg)
 
 Parse directory listing
 
