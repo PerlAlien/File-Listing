@@ -2,7 +2,6 @@ use strict;
 use warnings;
 use File::Listing;
 use Test::More;
-use Data::Dumper qw( Dumper );
 
 subtest 'unix' => sub {
 
@@ -153,7 +152,6 @@ subtest 'apache' => sub {
 
       my @listing = parse_dir(shift @dir, undef, "apache");
       ok(@listing);
-      note Dumper(\@listing);
    };
   }
 

@@ -4,7 +4,7 @@ use strict;
 use warnings;
 use Carp ();
 use HTTP::Date qw(str2time);
-use base qw( Exporter );
+use Exporter 5.57 qw( import );
 
 # ABSTRACT: Parse directory listing
 # VERSION
