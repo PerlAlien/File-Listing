@@ -1,6 +1,9 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Main git repository has now been detached from the original
+    repository (originally it was a fork).  The old repository
+    can be found at https://github.com/gisle/file-listing
 
 6.14      2020-11-30 05:48:07 -0700
   - Production version identical to 6.12_01
