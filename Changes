@@ -1,6 +1,7 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+  - Support dosftp listings with four-digit years (gh#3, gh#26)
 
 6.15      2022-04-17 04:09:58 -0600
   - Main git repository has now been detached from the original

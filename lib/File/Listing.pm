@@ -246,10 +246,14 @@ sub line
 
     my ($date, $size_or_dir, $name, $size);
 
+    # usual format:
     # 02-05-96  10:48AM                 1415 src.slf
     # 09-10-96  09:18AM       <DIR>          sl_util
+    # alternative dos format with four-digit year:
+    # 02-05-2022  10:48AM                 1415 src.slf
+    # 09-10-2022  09:18AM       <DIR>          sl_util
     if (($date, $size_or_dir, $name) =
-        /^(\d\d-\d\d-\d\d\s+\d\d:\d\d\wM)         # Date and time info
+        /^(\d\d-\d\d-\d{2,4}\s+\d\d:\d\d\wM)      # Date and time info
          \s+                                      # Some space
          (<\w{3}>|\d+)                            # Dir or Size
          \s+                                      # Some more space
