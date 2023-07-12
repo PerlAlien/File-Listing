@@ -1,6 +1,8 @@
 Revision history for {{$dist->name}}
 
 {{$NEXT}}
+
+6.16      2023-07-12 15:22:25 -0600
   - Support dosftp listings with four-digit years (gh#3, gh#26)
 
 6.15      2022-04-17 04:09:58 -0600
