@@ -143,6 +143,8 @@ Gavin Peters
 
 Graeme Thompson
 
+Grant Street Group
+
 Hans-H. Froehlich
 
 Ian Kilgore
@@ -207,7 +209,7 @@ uid39246
 
 # COPYRIGHT AND LICENSE
 
-This software is copyright (c) 1996-2020 by Gisle Aas.
+This software is copyright (c) 1996-2022 by Gisle Aas.
 
 This is free software; you can redistribute it and/or modify it under
 the same terms as the Perl 5 programming language system itself.
