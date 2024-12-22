@@ -1,3 +1,5 @@
 /File-Listing-*
 /.build
 *.swp
+*.old
+*.orig
